@@ -12,6 +12,22 @@ export default class Select {
   get selectedOption() {
     return this.options.find((option) => option.selected)
   }
+
+  selectValue(value) {
+    const newSelectedOption = this.options.find((option) => {
+      return option.value === value
+    })
+    const prevSelectedOption = this.selectedOption
+    // remove selected attribute from prev option
+    prevSelectedOption.selected = false
+    prevSelectedOption.element.selected = false
+
+    // add selected attribute from new option
+    newSelectedOption.selected = true
+    newSelectedOption.element.selected = true
+
+    this.labelElement.innerText = newSelectedOption.label
+  }
 }
 
 function setupCustomElement(select) {
@@ -26,12 +42,33 @@ function setupCustomElement(select) {
   select.options.forEach((option) => {
     const optionElement = document.createElement('li')
     optionElement.classList.add('custom-select-option')
+
+    // add selected class on actual selected option
     optionElement.classList.toggle('selected', option.selected)
     optionElement.innerText = option.label
     optionElement.dataset.value = option.value
+    optionElement.addEventListener('click', () => {
+      // handle change of selected class and close after clicking an option
+      select.optionsCustomElement
+        .querySelector(`[data-value=${select.selectedOption.value}]`)
+        .classList.remove('selected')
+      select.selectValue(option.value)
+      optionElement.classList.add('selected')
+      select.optionsCustomElement.classList.remove('show')
+    })
     select.optionsCustomElement.append(optionElement)
   })
   select.customElement.append(select.optionsCustomElement)
+
+  // open and close event
+  select.labelElement.addEventListener('click', () => {
+    select.optionsCustomElement.classList.toggle('show')
+  })
+
+  // close on blur
+  select.customElement.addEventListener('blur', () => {
+    select.optionsCustomElement.classList.remove('show')
+  })
 }
 
 function getFormattedOptions(optionElements) {

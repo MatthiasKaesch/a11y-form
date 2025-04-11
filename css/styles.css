@@ -136,12 +136,15 @@
   margin: 0;
   border: 2px solid var(--text-color-dark);
   border-top: none;
-  list-style-type: none;
+  /*   list-style-type: none; */
   background-color: var(--bg-color-bright);
+  /*  transform: translateY(-1rem);
+  transition: transform 0.1s ease-in-out; */
 }
 
 .custom-select-options.show {
   display: block;
+  /*   transform: translateY(0rem); */
 }
 
 .custom-select-option {
