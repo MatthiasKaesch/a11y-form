@@ -53,6 +53,7 @@ const validateFormInputs = (inputElements = formInputs) => {
   checkForEmptyInputs(inputElements, true)
   checkForShortInputs(inputElements, true)
   validateEmailInput(inputElements, true)
+  validatePasswordInput(inputElements, true)
 }
 
 // Check enabling of submitButton
@@ -64,6 +65,7 @@ const enableSumbitButton = (renderErrorMsg = false) => {
     checkForEmptyInputs(formInputs, false),
     checkForShortInputs(formInputs, false),
     validateEmailInput(formInputs, false),
+    validatePasswordInput(formInputs, false),
   ]
 
   const enableSubmitButton = requirements.some((requirement) => {

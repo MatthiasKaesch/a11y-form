@@ -45,3 +45,29 @@ const validateEmailInput = (inputData, renderErrorMsg) => {
   })
   return valid
 }
+
+const validatePasswordInput = (inputData, renderErrorMsg) => {
+  let valid = true
+
+  const allowedPasswordRegex = /^[A-Za-z0-9!@#$%&*._-]+$/
+
+  inputData.forEach((input) => {
+    if (!checkForEmptyInputs([input])) return
+    if (input.name !== 'password') return
+
+    const value = input.value.trim()
+
+    if (!allowedPasswordRegex.test(value)) {
+      valid = false
+      if (renderErrorMsg) {
+        renderErrorMessage(
+          input,
+          ERROR_MESSAGES[input.name]?.invalid ||
+            'Password contains invalid characters',
+        )
+      }
+    }
+  })
+
+  return valid
+}
