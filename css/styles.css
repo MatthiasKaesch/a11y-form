@@ -1,0 +1,117 @@
+:root {
+  --bg-color-bright: #f6f6f6;
+  --text-color-dark: #333333;
+
+  --clr-button-default: #462255;
+  --clr-button-hover: #6c3483;
+  --clr-button-disabled: #6f6f6f;
+
+  --clr-hover-border: #508aa8;
+  --clr-hover-outline: #60b8e3;
+
+  --clr-error-highlight: #e00000;
+  --clr-error-outline: #ff5c5c;
+  --clr-error-background: #ffd6d6;
+}
+
+.example-page {
+  background-color: var(--bg-color-bright);
+}
+
+.form-container {
+  width: 60%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.form-register-error {
+  min-height: 1.5em;
+  padding-bottom: 0.5rem;
+}
+
+.form-register-error .error-msg {
+  display: inherit;
+  margin: 0;
+  color: var(--clr-error-highlight);
+}
+
+.form-fieldset {
+  padding: 1em 3em 4em;
+  border: none;
+  border-radius: 4px;
+  background-color: #e1e1e1;
+}
+
+.form-legend {
+  font-size: 0;
+}
+
+.form-register-input,
+.form-register-label,
+.form-register-button {
+  display: block;
+}
+
+.form-register-label {
+  display: inline-block;
+  font-size: 1.25em;
+  line-height: 1.5;
+  margin-top: 1em;
+  color: var(--text-color-dark);
+}
+
+.form-register-input {
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 1.25em;
+  height: 50px;
+}
+
+.form-register-input[type="text"] {
+  color: var(--text-color-dark);
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 0.5em;
+}
+
+.form-register-input[type="text"]:hover {
+  border-color: var(--clr-hover-border);
+  outline: 3px solid var(--clr-hover-outline);
+}
+
+.form-register-input[aria-invalid] {
+  border-color: var(--clr-error-highlight);
+  background-color: var(--clr-error-background);
+}
+
+.form-register-input[aria-invalid]:hover {
+  border-color: var(--clr-error-highlight);
+  outline: 3px solid var(--clr-error-outline);
+}
+
+.form-register-button {
+  display: inline-block;
+  background-color: var(--clr-button-default);
+  color: var(--bg-color-bright);
+  border: 1px solid var(--clr-button-default);
+  margin-top: 1.5em;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.form-register-button:hover {
+  background-color: var(--clr-button-hover);
+}
+
+.form-register-button[aria-disabled="true"] {
+  background-color: var(--clr-button-disabled);
+  border-color: var(--clr-button-disabled);
+  color: var(--bg-color-bright);
+  cursor: not-allowed;
+}
+
+.button-error-message {
+  display: inline-block;
+  margin-left: 1em;
+}

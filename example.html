@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG 3.3.1 - Errors are described as text (Level A)</title>
+
+<!--     <link rel="icon" href="../assets/favicon.ico" /> -->
+    <link rel="stylesheet" href="../assets/css/normalize.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="../assets/js/scripts.js" defer></script>
+  
+
+
+
+    <script src="js/errorMessages.js" defer></script>
+    <script src="js/validation.js" defer></script>
+    <script src="js/script.js" defer></script>
+  </head>
+
+  <body >
+
+    <main>
+      <div class="form-container">
+        <template id="error-msg">
+          <p class="error-msg"></p>
+        </template>
+
+        <form
+          id="form-element"
+          class="form-register"
+          onsubmit="validateFormInputs()"
+          novalidate>
+          <fieldset class="form-fieldset">
+            <legend class="form-legend">Personalia</legend>
+
+            <label class="form-register-label" for="fname">First name*</label>
+            <div
+              id="fname-error"
+              role="alert"
+              class="form-register-error"></div>
+            <input
+              class="form-register-input"
+              type="text"
+              id="fname"
+              name="fname"
+              data-type="name"
+              placeholder="Firstname" />
+
+            <label class="form-register-label" for="lname">Last name*</label>
+            <div
+              id="lname-error"
+              class="form-register-error"
+              role="alert"></div>
+            <input
+              class="form-register-input"
+              type="text"
+              id="lname"
+              name="lname"
+              data-type="name"
+              placeholder="Lastname" />
+
+            <button
+              id="submit-button"
+              class="form-register-button"
+              type="submit"
+              name="button"
+              aria-disabled="false">
+              Register
+            </button>
+            <div
+              id="button-error"
+              class="form-register-error button-error-message"></div>
+          </fieldset>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
