@@ -13,7 +13,12 @@ const ERROR_MESSAGES = {
   },
   password: {
     empty: 'Password is required',
-    invalid: 'Password may only contain A-Z, 0-9, !@#$%&*._-',
+    invalid: 'Password contains invalid characters',
+    tooShort: 'Password must be at least 8 characters long',
+    missingUppercase: 'Password must contain at least one uppercase letter',
+    missingNumber: 'Password must contain at least one number',
+    missingSpecial:
+      'Password must contain at least one special character (!@#$%&*._-)',
   },
   button: 'Not all fields are filled in correctly',
 }

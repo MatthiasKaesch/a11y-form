@@ -71,3 +71,67 @@ const validatePasswordInput = (inputData, renderErrorMsg) => {
 
   return valid
 }
+
+const validatePasswordStrength = (inputData, renderErrorMsg) => {
+  let valid = true
+
+  const minLength = 8
+  const allowedCharsRegex = /^[A-Za-z0-9!@#$%&*._-]+$/
+  const hasNumber = /\d/
+  const hasSpecial = /[!@#$%&*._-]/
+  const hasUppercase = /[A-Z]/
+
+  inputData.forEach((input) => {
+    if (!checkForEmptyInputs([input])) return
+    if (input.name !== 'password') return
+
+    const value = input.value.trim()
+
+    if (value.length < minLength) {
+      valid = false
+      if (renderErrorMsg) {
+        renderErrorMessage(input, 'Password must be at least 8 characters long')
+      }
+    }
+
+    if (!hasUppercase.test(value)) {
+      valid = false
+      if (renderErrorMsg) {
+        renderErrorMessage(
+          input,
+          'Password must contain at least one uppercase letter',
+        )
+      }
+    }
+
+    if (!hasNumber.test(value)) {
+      valid = false
+      if (renderErrorMsg) {
+        renderErrorMessage(input, 'Password must contain at least one number')
+      }
+    }
+
+    if (!hasSpecial.test(value)) {
+      valid = false
+      if (renderErrorMsg) {
+        renderErrorMessage(
+          input,
+          'Password must contain at least one special character (!@#$%&*._-)',
+        )
+      }
+    }
+
+    if (!allowedCharsRegex.test(value)) {
+      valid = false
+      if (renderErrorMsg) {
+        renderErrorMessage(
+          input,
+          ERROR_MESSAGES[input.name]?.invalid ||
+            'Password contains invalid characters',
+        )
+      }
+    }
+  })
+
+  return valid
+}
