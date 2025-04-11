@@ -9,7 +9,7 @@ const ERROR_MESSAGES = {
   },
   email: {
     empty: 'Email is required',
-    /* length: 'Lastname must be at least 2 characters long' */
+    invalid: 'Please enter a valid email address',
   },
   password: {
     empty: 'Password is required',
