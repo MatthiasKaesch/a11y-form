@@ -1,11 +1,19 @@
 const ERROR_MESSAGES = {
   fname: {
     empty: 'Firstname is required',
-    length: 'Firstname must be at least 2 characters long'
+    length: 'Firstname must be at least 2 characters long',
   },
   lname: {
     empty: 'Lastname is required',
-    length: 'Lastname must be at least 2 characters long'
+    length: 'Lastname must be at least 2 characters long',
   },
-  button: 'Not all fields are filled in correctly'
+  email: {
+    empty: 'Email is required',
+    /* length: 'Lastname must be at least 2 characters long' */
+  },
+  password: {
+    empty: 'Password is required',
+    /* length: 'Lastname must be at least 2 characters long' */
+  },
+  button: 'Not all fields are filled in correctly',
 }
