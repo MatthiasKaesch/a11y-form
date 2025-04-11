@@ -68,14 +68,16 @@
   height: 50px;
 }
 
-.form-register-input[type="text"] {
+.form-register-input[type='text'],
+.form-register-input[type='email'] {
   color: var(--text-color-dark);
   border: 2px solid #e0e0e0;
   border-radius: 4px;
   padding: 0.5em;
 }
 
-.form-register-input[type="text"]:hover {
+.form-register-input[type='text']:hover,
+.form-register-input[type='email']:hover {
   border-color: var(--clr-hover-border);
   outline: 3px solid var(--clr-hover-outline);
 }
@@ -104,7 +106,7 @@
   background-color: var(--clr-button-hover);
 }
 
-.form-register-button[aria-disabled="true"] {
+.form-register-button[aria-disabled='true'] {
   background-color: var(--clr-button-disabled);
   border-color: var(--clr-button-disabled);
   color: var(--bg-color-bright);
