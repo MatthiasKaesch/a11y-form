@@ -52,6 +52,7 @@ const validateFormInputs = (inputElements = formInputs) => {
   // "2nd argument is to render error message"
   checkForEmptyInputs(inputElements, true)
   checkForShortInputs(inputElements, true)
+  validateEmailInput(inputElements, true)
 }
 
 // Check enabling of submitButton
@@ -62,6 +63,7 @@ const enableSumbitButton = (renderErrorMsg = false) => {
     // "2nd argument is to NOT render error message"
     checkForEmptyInputs(formInputs, false),
     checkForShortInputs(formInputs, false),
+    validateEmailInput(formInputs, false),
   ]
 
   const enableSubmitButton = requirements.some((requirement) => {
