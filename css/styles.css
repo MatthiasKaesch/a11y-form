@@ -1,9 +1,9 @@
 :root {
   --bg-color-bright: #f6f6f6;
-  --text-color-dark: #333333;
+  --text-color-dark: #1c1c1c;
 
-  --clr-button-default: #462255;
-  --clr-button-hover: #6c3483;
+  --clr-button-default: #ff5905;
+  --clr-button-hover: #ff8547;
   --clr-button-disabled: #6f6f6f;
 
   --clr-hover-border: #508aa8;
@@ -23,6 +23,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 3rem 0;
+  font-family: 'Lucida Sans', sans-serif;
 }
 
 .form-register-error {
@@ -55,29 +56,29 @@
 
 .form-register-label {
   display: inline-block;
+  margin-top: 1em;
   font-size: 1.25em;
   line-height: 1.5;
-  margin-top: 1em;
   color: var(--text-color-dark);
 }
 
 .form-register-input {
   box-sizing: border-box;
   width: 100%;
-  font-size: 1.25em;
   height: 50px;
+  font-size: 1.25em;
 }
 
 .form-register-input {
+  padding: 0.5em;
   color: var(--text-color-dark);
   border: 2px solid #e0e0e0;
   border-radius: 4px;
-  padding: 0.5em;
 }
 
 .form-register-input:hover {
-  border-color: var(--clr-hover-border);
   outline: 3px solid var(--clr-hover-outline);
+  border-color: var(--clr-hover-border);
 }
 
 .form-register-input[aria-invalid] {
@@ -92,22 +93,25 @@
 
 .form-register-button {
   display: inline-block;
-  background-color: var(--clr-button-default);
-  color: var(--bg-color-bright);
-  border: 1px solid var(--clr-button-default);
   margin-top: 1.5em;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
   font-size: 1.5em;
+  color: var(--bg-color-bright);
+  background-color: var(--clr-button-default);
+  border: 1px solid var(--clr-button-default);
   cursor: pointer;
 }
 
 .form-register-button:hover {
+  color: var(--text-color-dark);
   background-color: var(--clr-button-hover);
 }
 
 .form-register-button[aria-disabled='true'] {
+  color: var(--bg-color-bright);
   background-color: var(--clr-button-disabled);
   border-color: var(--clr-button-disabled);
-  color: var(--bg-color-bright);
   cursor: not-allowed;
 }
 
