@@ -4,7 +4,7 @@ const submitButton = document.querySelector('#submit-button')
 const formInputs = Array.from(form.querySelectorAll('input'))
 
 // Cancel Form submit
-form.addEventListener('submit', e => {
+form.addEventListener('submit', (e) => {
   e.preventDefault()
 
   validateFormInputs()
@@ -14,8 +14,8 @@ form.addEventListener('submit', e => {
 })
 
 // Onblur validation for each input
-formInputs.forEach(input => {
-  input.onblur = e => {
+formInputs.forEach((input) => {
+  input.onblur = (e) => {
     validateFormInputs([e.target])
     enableSumbitButton()
   }
@@ -27,7 +27,7 @@ const renderErrorMessage = (HTMLElement, errorKey) => {
   const errorContainer = document.getElementById(`${HTMLElement.name}-error`)
 
   if (HTMLElement.name !== 'button') {
-    HTMLElement.setAttribute('aria-invalid', true)
+    HTMLElement.setAttribute('aria-invalid', '')
   }
 
   errorMsg.querySelector('p').innerText = errorKey
@@ -35,11 +35,13 @@ const renderErrorMessage = (HTMLElement, errorKey) => {
 }
 
 // Clear error message(s)
-const clearErrorMessages = HTMLElement => {
-  HTMLElement.forEach(element => {
-    const errorContainer = element.previousElementSibling
-    element.removeAttribute('aria-invalid', true)
-    errorContainer.innerHTML = ''
+const clearErrorMessages = (HTMLElements = []) => {
+  HTMLElements.forEach((element) => {
+    const errorContainer = document.getElementById(`${element.name}-error`)
+    element.removeAttribute('aria-invalid')
+    if (errorContainer) {
+      errorContainer.innerHTML = ''
+    }
   })
 }
 
@@ -59,20 +61,20 @@ const enableSumbitButton = (renderErrorMsg = false) => {
   const requirements = [
     // "2nd argument is to NOT render error message"
     checkForEmptyInputs(formInputs, false),
-    checkForShortInputs(formInputs, false)
+    checkForShortInputs(formInputs, false),
   ]
 
-  const enableSubmitButton = requirements.some(requirement => {
+  const enableSubmitButton = requirements.some((requirement) => {
     return requirement === false
   })
 
   if (enableSubmitButton) {
-    submitButton.setAttribute('aria-disabled', true)
+    submitButton.setAttribute('aria-disabled', '')
     if (renderErrorMsg) {
       renderErrorMessage(submitButton, ERROR_MESSAGES.button)
     }
   } else {
-    submitButton.removeAttribute('aria-disabled', true)
+    submitButton.removeAttribute('aria-disabled')
   }
 
   return enableSubmitButton
