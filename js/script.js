@@ -1,7 +1,14 @@
+import Select from './select.js'
+
 const form = document.querySelector('#form-element')
 const errorMsgTemplate = document.getElementById('error-msg')
 const submitButton = document.querySelector('#submit-button')
 const formInputs = Array.from(form.querySelectorAll('input'))
+
+const selectElements = document.querySelectorAll('[data-custom]')
+selectElements.forEach((selectElement) => {
+  new Select(selectElement)
+})
 
 // Cancel Form submit
 form.addEventListener('submit', (e) => {

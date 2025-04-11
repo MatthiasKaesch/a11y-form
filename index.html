@@ -10,7 +10,7 @@
 
     <script src="js/errorMessages.js" defer></script>
     <script src="js/validation.js" defer></script>
-    <script src="js/script.js" defer></script>
+    <script src="js/script.js" type="module"></script>
   </head>
 
   <body>
@@ -88,6 +88,48 @@
               data-type="password"
               placeholder="Your password"
             />
+
+            <label class="form-register-label" for="country">Country*</label>
+            <div
+              id="country-error"
+              class="form-register-error"
+              role="alert"
+            ></div>
+            <select
+              class="form-register-select"
+              name="country"
+              id="country"
+              data-custom
+            >
+              <option value="">Please select a country</option>
+              <option value="at">Austria</option>
+              <option value="be">Belgium</option>
+              <option value="bg">Bulgaria</option>
+              <option value="hr">Croatia</option>
+              <option value="cy">Cyprus</option>
+              <option value="cz">Czech Republic</option>
+              <option value="dk">Denmark</option>
+              <option value="ee">Estonia</option>
+              <option value="fi">Finland</option>
+              <option value="fr">France</option>
+              <option value="de">Germany</option>
+              <option value="gr">Greece</option>
+              <option value="hu">Hungary</option>
+              <option value="ie">Ireland</option>
+              <option value="it">Italy</option>
+              <option value="lv">Latvia</option>
+              <option value="lt">Lithuania</option>
+              <option value="lu">Luxembourg</option>
+              <option value="mt">Malta</option>
+              <option value="nl">Netherlands</option>
+              <option value="pl">Poland</option>
+              <option value="pt">Portugal</option>
+              <option value="ro">Romania</option>
+              <option value="sk">Slovakia</option>
+              <option value="si">Slovenia</option>
+              <option value="es">Spain</option>
+              <option value="se">Sweden</option>
+            </select>
 
             <button
               id="submit-button"
