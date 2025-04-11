@@ -12,6 +12,8 @@
   --clr-error-highlight: #e00000;
   --clr-error-outline: #ff5c5c;
   --clr-error-background: #ffd6d6;
+
+  --custom-select-width: 250px;
 }
 
 .example-page {
@@ -54,10 +56,6 @@
   display: block;
 }
 
-select {
-  display: none;
-}
-
 .form-register-label {
   display: inline-block;
   margin-top: 1em;
@@ -67,7 +65,10 @@ select {
 }
 
 .form-register-input,
-.custom-select-container {
+.custom-select-container,
+.custom-select-value,
+.custom-select-options,
+.custom-select-option {
   box-sizing: border-box;
 }
 
@@ -94,6 +95,68 @@ select {
 .form-register-input[aria-invalid]:hover {
   border-color: var(--clr-error-highlight);
   outline: 3px solid var(--clr-error-outline);
+}
+
+.custom-select-container {
+  position: relative;
+  width: var(--custom-select-width);
+}
+
+.custom-select-value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border: 1px solid var(--text-color-dark);
+  cursor: pointer;
+  user-select: none;
+  background-color: var(--bg-color-bright);
+}
+
+.custom-select-container:focus > .custom-select-value {
+  outline: 1px solid var(--text-color-dark);
+}
+
+.custom-select-value::after {
+  content: '';
+  display: inline-block;
+  margin-left: 0.75rem;
+  margin-top: 0.25rem;
+  border: 4px solid transparent;
+  border-top-color: var(--text-color-dark);
+}
+
+.custom-select-options {
+  position: absolute;
+  display: none;
+  width: var(--custom-select-width);
+  height: var(--custom-select-width);
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+  border: 2px solid var(--text-color-dark);
+  border-top: none;
+  list-style-type: none;
+  background-color: var(--bg-color-bright);
+}
+
+.custom-select-options.show {
+  display: block;
+}
+
+.custom-select-option {
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-select-option:hover {
+  background-color: var(--clr-hover-outline);
+}
+
+.custom-select-option.selected {
+  background-color: var(--clr-hover-border);
+  color: var(--bg-color-bright);
 }
 
 .form-register-button {
