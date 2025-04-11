@@ -68,16 +68,14 @@
   height: 50px;
 }
 
-.form-register-input[type='text'],
-.form-register-input[type='email'] {
+.form-register-input {
   color: var(--text-color-dark);
   border: 2px solid #e0e0e0;
   border-radius: 4px;
   padding: 0.5em;
 }
 
-.form-register-input[type='text']:hover,
-.form-register-input[type='email']:hover {
+.form-register-input:hover {
   border-color: var(--clr-hover-border);
   outline: 3px solid var(--clr-hover-outline);
 }
