@@ -21,6 +21,7 @@ export default class Select {
     const newSelectedOption = this.options.find((option) => {
       return option.value === value
     })
+
     const prevSelectedOption = this.selectedOption
     // remove selected attribute from prev option
     prevSelectedOption.selected = false
@@ -62,21 +63,12 @@ function setupCustomElement(select) {
     'aria-controls',
     `listbox-${select.element.id}`,
   )
-  select.customElement.setAttribute(
-    'aria-labelledby',
-    `label-${select.element.id}`,
-  )
-
-  select.labelElement.classList.add('custom-select-value')
 
   // A11y: ID for aria-labelledby
   select.labelElement.id = `label-${select.element.id}`
-  select.labelElement.innerText = select.selectedOption.label
 
-  select.customElement.setAttribute(
-    'aria-labelledby',
-    `label-${select.element.id}`,
-  )
+  select.labelElement.classList.add('custom-select-value')
+  select.labelElement.innerText = select.selectedOption.label
   select.customElement.append(select.labelElement)
 
   select.optionsCustomElement.classList.add('custom-select-options')
@@ -108,7 +100,7 @@ function setupCustomElement(select) {
 
   // open and close event
   select.labelElement.addEventListener('click', () => {
-    select.optionsCustomElement.classList.toggle('show')
+    const isOpen = select.optionsCustomElement.classList.toggle('show')
     select.customElement.setAttribute('aria-expanded', String(isOpen))
   })
 
@@ -122,9 +114,11 @@ function setupCustomElement(select) {
   let searchTerm = ''
   select.customElement.addEventListener('keydown', (e) => {
     switch (e.code) {
-      case 'Space':
-        select.optionsCustomElement.classList.toggle('show')
+      case 'Space': {
+        const isOpen = select.optionsCustomElement.classList.toggle('show')
+        select.customElement.setAttribute('aria-expanded', String(isOpen))
         break
+      }
 
       case 'ArrowUp': {
         const prevOption = select.options[select.selectedOptionIndex - 1]
@@ -147,6 +141,7 @@ function setupCustomElement(select) {
         select.optionsCustomElement.classList.remove('show')
         select.customElement.setAttribute('aria-expanded', 'false')
         break
+
       default: {
         clearTimeout(debounceTimeout)
         searchTerm += e.key
