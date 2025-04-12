@@ -1,4 +1,4 @@
-const ERROR_MESSAGES = {
+export const ERROR_MESSAGES = {
   fname: {
     empty: 'Firstname is required',
     length: 'Firstname must be at least 2 characters long',

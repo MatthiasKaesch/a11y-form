@@ -1,4 +1,7 @@
-const checkForEmptyInputs = (inputData, renderErrorMsg) => {
+import { ERROR_MESSAGES } from './errorMessages.js'
+import { renderErrorMessage } from './script.js'
+
+export const checkForEmptyInputs = (inputData, renderErrorMsg) => {
   let valid = true
   inputData.forEach((input) => {
     if (input.value.trim() === '') {
@@ -10,7 +13,7 @@ const checkForEmptyInputs = (inputData, renderErrorMsg) => {
   return valid
 }
 
-const checkForShortInputs = (inputData, renderErrorMsg) => {
+export const checkForShortInputs = (inputData, renderErrorMsg) => {
   let valid = true
   inputData.forEach((input) => {
     if (!checkForEmptyInputs([input])) return
@@ -25,7 +28,7 @@ const checkForShortInputs = (inputData, renderErrorMsg) => {
   return valid
 }
 
-const validateEmailInput = (inputData, renderErrorMsg) => {
+export const validateEmailInput = (inputData, renderErrorMsg) => {
   let valid = true
   const emailRegex = /^[\p{L}0-9._%+-]+@[\p{L}0-9.-]+\.[\p{L}]{2,}$/u
 
@@ -46,7 +49,7 @@ const validateEmailInput = (inputData, renderErrorMsg) => {
   return valid
 }
 
-const validatePasswordInput = (inputData, renderErrorMsg) => {
+export const validatePasswordInput = (inputData, renderErrorMsg) => {
   let valid = true
 
   const allowedPasswordRegex = /^[A-Za-z0-9!@#$%&*._-]+$/
@@ -72,7 +75,7 @@ const validatePasswordInput = (inputData, renderErrorMsg) => {
   return valid
 }
 
-const validatePasswordStrength = (inputData, renderErrorMsg) => {
+export const validatePasswordStrength = (inputData, renderErrorMsg) => {
   let valid = true
 
   const minLength = 8

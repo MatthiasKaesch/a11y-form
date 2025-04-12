@@ -1,7 +1,15 @@
 import Select from './select.js'
+import {
+  checkForEmptyInputs,
+  checkForShortInputs,
+  validateEmailInput,
+  validatePasswordInput,
+  validatePasswordStrength,
+} from './validation.js'
+
+import { ERROR_MESSAGES } from '../js/errorMessages.js'
 
 const form = document.querySelector('#form-element')
-const errorMsgTemplate = document.getElementById('error-msg')
 const submitButton = document.querySelector('#submit-button')
 const formInputs = Array.from(form.querySelectorAll('input'))
 
@@ -29,7 +37,8 @@ formInputs.forEach((input) => {
 })
 
 // Render error message
-const renderErrorMessage = (HTMLElement, errorKey) => {
+export const renderErrorMessage = (HTMLElement, errorKey) => {
+  const errorMsgTemplate = document.getElementById('error-msg')
   const errorMsg = errorMsgTemplate.content.cloneNode(true)
   const errorContainer = document.getElementById(`${HTMLElement.name}-error`)
 
