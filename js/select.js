@@ -5,10 +5,13 @@ export default class Select {
     this.customElement = document.createElement('div')
     this.labelElement = document.createElement('span')
     this.optionsCustomElement = document.createElement('ul')
+
     setupCustomElement(this)
+
     element.style.display = 'none'
     element.after(this.customElement)
   }
+
   get selectedOption() {
     return this.options.find((option) => option.selected)
   }
@@ -18,19 +21,18 @@ export default class Select {
   }
 
   selectValue(value) {
-    const newSelectedOption = this.options.find((option) => {
-      return option.value === value
-    })
-
+    const newSelectedOption = this.options.find(
+      (option) => option.value === value,
+    )
     const prevSelectedOption = this.selectedOption
-    // remove selected attribute from prev option
+
+    // Update native select
     prevSelectedOption.selected = false
     prevSelectedOption.element.selected = false
-
-    // add selected attribute from new option
     newSelectedOption.selected = true
     newSelectedOption.element.selected = true
 
+    // Update UI
     this.labelElement.innerText = newSelectedOption.label
 
     // ARIA: reference active option
@@ -39,7 +41,7 @@ export default class Select {
       `option-${newSelectedOption.value}`,
     )
 
-    // handle change of selected class and close after clicking an option
+    // handle change of "selected" class and close after click
     this.optionsCustomElement
       .querySelector(`[data-value=${prevSelectedOption.value}]`)
       .classList.remove('selected')
@@ -55,7 +57,7 @@ function setupCustomElement(select) {
   select.customElement.classList.add('custom-select-container')
   select.customElement.tabIndex = 0
 
-  //ARIA: add aria attributes
+  // ARIA: Custom select container
   select.customElement.setAttribute('role', 'combobox')
   select.customElement.setAttribute('aria-haspopup', 'listbox')
   select.customElement.setAttribute('aria-expanded', 'false')
@@ -64,19 +66,19 @@ function setupCustomElement(select) {
     `listbox-${select.element.id}`,
   )
 
-  // A11y: ID for aria-labelledby
-  select.labelElement.id = `label-${select.element.id}`
-
+  // ARIA: Label element
   select.labelElement.classList.add('custom-select-value')
+  select.labelElement.id = `label-${select.element.id}`
   select.labelElement.innerText = select.selectedOption.label
+  select.customElement.setAttribute('aria-labelledby', select.labelElement.id)
   select.customElement.append(select.labelElement)
 
+  // ARIA: Option list
   select.optionsCustomElement.classList.add('custom-select-options')
-
-  //ARIA: add aria attributes to ul
   select.optionsCustomElement.setAttribute('role', 'listbox')
   select.optionsCustomElement.setAttribute('id', `listbox-${select.element.id}`)
 
+  // Create custom options
   select.options.forEach((option) => {
     const optionElement = document.createElement('li')
     optionElement.classList.add('custom-select-option')
@@ -84,34 +86,38 @@ function setupCustomElement(select) {
     //ARIA: add aria attributes to li
     optionElement.setAttribute('role', 'option')
     optionElement.setAttribute('aria-selected', option.selected)
-    optionElement.id = `option-${option.value}`
 
-    // add selected class on actual selected option
-    optionElement.classList.toggle('selected', option.selected)
-    optionElement.innerText = option.label
+    optionElement.id = `option-${option.value}`
     optionElement.dataset.value = option.value
+    optionElement.innerText = option.label
+
+    if (option.selected) optionElement.classList.add('selected')
+
     optionElement.addEventListener('click', () => {
       select.selectValue(option.value)
       select.optionsCustomElement.classList.remove('show')
     })
     select.optionsCustomElement.append(optionElement)
   })
+
   select.customElement.append(select.optionsCustomElement)
 
-  // open and close event
+  // Open/close toggle
   select.labelElement.addEventListener('click', () => {
     const isOpen = select.optionsCustomElement.classList.toggle('show')
     select.customElement.setAttribute('aria-expanded', String(isOpen))
   })
 
-  // close on blur
+  // Close on blur
   select.customElement.addEventListener('blur', () => {
     select.optionsCustomElement.classList.remove('show')
     select.customElement.setAttribute('aria-expanded', 'false')
   })
 
+  // Keyboard interaction
   let debounceTimeout
   let searchTerm = ''
+
   select.customElement.addEventListener('keydown', (e) => {
     switch (e.code) {
       case 'Space': {
@@ -152,6 +158,7 @@ function setupCustomElement(select) {
         const searchedOption = select.options.find((option) => {
           return option.label.toLowerCase().startsWith(searchTerm)
         })
+
         if (searchedOption) select.selectValue(searchedOption.value)
       }
     }
