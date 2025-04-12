@@ -1,5 +1,5 @@
 import { ERROR_MESSAGES } from './errorMessages.js'
-import { renderErrorMessage } from './script.js'
+import { renderErrorMessage } from './renderErrorMessage.js'
 
 export const checkForEmptyInputs = (inputData, renderErrorMsg) => {
   let valid = true

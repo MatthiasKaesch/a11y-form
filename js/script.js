@@ -36,20 +36,6 @@ formInputs.forEach((input) => {
   }
 })
 
-// Render error message
-export const renderErrorMessage = (HTMLElement, errorKey) => {
-  const errorMsgTemplate = document.getElementById('error-msg')
-  const errorMsg = errorMsgTemplate.content.cloneNode(true)
-  const errorContainer = document.getElementById(`${HTMLElement.name}-error`)
-
-  if (HTMLElement.name !== 'button') {
-    HTMLElement.setAttribute('aria-invalid', '')
-  }
-
-  errorMsg.querySelector('p').innerText = errorKey
-  errorContainer.appendChild(errorMsg)
-}
-
 // Clear error message(s)
 const clearErrorMessages = (HTMLElements = []) => {
   HTMLElements.forEach((element) => {
