@@ -11,6 +11,7 @@ export default class Select {
     this.optionsCustomElement = document.createElement('ul')
 
     setupCustomElement(this)
+    setKeyBindings(this)
 
     element.style.display = 'none'
     element.after(this.customElement)
@@ -26,10 +27,16 @@ export default class Select {
     return this.options.indexOf(this.selectedOption)
   }
 
+  get visibleOptions() {
+    return this.options.filter((opt) => !opt.isPlaceholder)
+  }
+
   selectValue(value) {
     const newSelectedOption = this.options.find(
       (option) => option.value === value,
     )
+    if (!newSelectedOption) return // Exit early if no match
+
     const prevSelectedOption = this.selectedOption
 
     // Update native select
@@ -37,9 +44,17 @@ export default class Select {
       prevSelectedOption.selected = false
       prevSelectedOption.element.selected = false
 
-      const prevCustomElement = this.optionsCustomElement.querySelector(
+      // Prevent crash due to prevOption doesnt exist
+      let prevCustomElement = null
+      if (prevSelectedOption) {
+        prevSelectedOption.selected = false
+        prevSelectedOption.element.selected = false
+      }
+
+      prevCustomElement = this.optionsCustomElement.querySelector(
         `[data-value="${prevSelectedOption.value}"]`,
       )
+
       if (prevCustomElement) {
         prevCustomElement.classList.remove('selected')
         prevCustomElement.setAttribute('aria-selected', 'false')
@@ -61,10 +76,12 @@ export default class Select {
 
     // handle change of "selected" class and close after click
     const newCustomElement = this.optionsCustomElement.querySelector(
-      `[data-value=${newSelectedOption.value}]`,
+      `[data-value="${CSS.escape(newSelectedOption.value)}"]`,
     )
-    newCustomElement.classList.add('selected')
-    newCustomElement.scrollIntoView({ block: 'nearest' })
+    if (newCustomElement) {
+      newCustomElement.classList.add('selected')
+      newCustomElement.scrollIntoView({ block: 'nearest' })
+    }
   }
 }
 
@@ -138,8 +155,9 @@ function setupCustomElement(select) {
     select.optionsCustomElement.classList.remove('show')
     select.customElement.setAttribute('aria-expanded', 'false')
   })
+}
 
-  // Keyboard interaction
+function setKeyBindings(select) {
   let debounceTimeout
   let searchTerm = ''
 
@@ -152,15 +170,19 @@ function setupCustomElement(select) {
       }
 
       case 'ArrowUp': {
-        const prevOption = select.options[select.selectedOptionIndex - 1]
-        if (prevOption) {
-          select.selectValue(prevOption.value)
+        const index = select.visibleOptions.indexOf(select.selectedOption)
+        if (index > 0) {
+          const prevOption = select.visibleOptions[index - 1]
+          if (prevOption) {
+            select.selectValue(prevOption.value)
+          }
         }
         break
       }
 
       case 'ArrowDown': {
-        const nextOption = select.options[select.selectedOptionIndex + 1]
+        const index = select.visibleOptions.indexOf(select.selectedOption)
+        const nextOption = select.visibleOptions[index >= 0 ? index + 1 : 0]
         if (nextOption) {
           select.selectValue(nextOption.value)
         }
@@ -180,9 +202,9 @@ function setupCustomElement(select) {
           searchTerm = ''
         }, 500)
 
-        const searchedOption = select.options.find((option) => {
-          return option.label.toLowerCase().startsWith(searchTerm)
-        })
+        const searchedOption = select.visibleOptions.find((option) =>
+          option.label.toLowerCase().startsWith(searchTerm),
+        )
 
         if (searchedOption) select.selectValue(searchedOption.value)
       }
