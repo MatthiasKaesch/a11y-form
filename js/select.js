@@ -2,6 +2,10 @@ export default class Select {
   constructor(element) {
     this.element = element
     this.options = getFormattedOptions(element.querySelectorAll('option'))
+
+    this.placeholder =
+      this.options.find((opt) => opt.isPlaceholder)?.label || ''
+
     this.customElement = document.createElement('div')
     this.labelElement = document.createElement('span')
     this.optionsCustomElement = document.createElement('ul')
@@ -13,7 +17,9 @@ export default class Select {
   }
 
   get selectedOption() {
-    return this.options.find((option) => option.selected)
+    return this.options.find(
+      (option) => option.selected && !option.isPlaceholder,
+    )
   }
 
   get selectedOptionIndex() {
@@ -27,13 +33,25 @@ export default class Select {
     const prevSelectedOption = this.selectedOption
 
     // Update native select
-    prevSelectedOption.selected = false
-    prevSelectedOption.element.selected = false
+    if (prevSelectedOption) {
+      prevSelectedOption.selected = false
+      prevSelectedOption.element.selected = false
+
+      const prevCustomElement = this.optionsCustomElement.querySelector(
+        `[data-value="${prevSelectedOption.value}"]`,
+      )
+      if (prevCustomElement) {
+        prevCustomElement.classList.remove('selected')
+        prevCustomElement.setAttribute('aria-selected', 'false')
+      }
+    }
+
     newSelectedOption.selected = true
     newSelectedOption.element.selected = true
 
-    // Update UI
+    // Update label
     this.labelElement.innerText = newSelectedOption.label
+    this.labelElement.classList.remove('placeholder')
 
     // ARIA: reference active option
     this.customElement.setAttribute(
@@ -42,9 +60,6 @@ export default class Select {
     )
 
     // handle change of "selected" class and close after click
-    this.optionsCustomElement
-      .querySelector(`[data-value=${prevSelectedOption.value}]`)
-      .classList.remove('selected')
     const newCustomElement = this.optionsCustomElement.querySelector(
       `[data-value=${newSelectedOption.value}]`,
     )
@@ -69,7 +84,16 @@ function setupCustomElement(select) {
   // ARIA: Label element
   select.labelElement.classList.add('custom-select-value')
   select.labelElement.id = `label-${select.element.id}`
-  select.labelElement.innerText = select.selectedOption.label
+
+  const selected = select.selectedOption
+  if (selected) {
+    select.labelElement.innerText = selected.label
+    select.labelElement.classList.remove('placeholder')
+  } else {
+    select.labelElement.innerText = select.placeholder
+    select.labelElement.classList.add('placeholder')
+  }
+
   select.customElement.setAttribute('aria-labelledby', select.labelElement.id)
   select.customElement.append(select.labelElement)
 
@@ -80,6 +104,7 @@ function setupCustomElement(select) {
 
   // Create custom options
   select.options.forEach((option) => {
+    if (option.isPlaceholder) return
     const optionElement = document.createElement('li')
     optionElement.classList.add('custom-select-option')
 
@@ -172,6 +197,7 @@ function getFormattedOptions(optionElements) {
       label: optionElement.label,
       selected: optionElement.selected,
       element: optionElement,
+      isPlaceholder: optionElement.disabled && optionElement.hidden,
     }
   })
 }
