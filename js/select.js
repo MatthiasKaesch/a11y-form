@@ -170,6 +170,7 @@ function setKeyBindings(select) {
       }
 
       case 'ArrowUp': {
+        e.preventDefault()
         const index = select.visibleOptions.indexOf(select.selectedOption)
         if (index > 0) {
           const prevOption = select.visibleOptions[index - 1]
@@ -181,6 +182,7 @@ function setKeyBindings(select) {
       }
 
       case 'ArrowDown': {
+        e.preventDefault()
         const index = select.visibleOptions.indexOf(select.selectedOption)
         const nextOption = select.visibleOptions[index >= 0 ? index + 1 : 0]
         if (nextOption) {
