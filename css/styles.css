@@ -16,8 +16,19 @@
   --custom-select-width: 250px;
 }
 
-.example-page {
-  background-color: var(--bg-color-bright);
+.form-container,
+.headline .text {
+  font-family: 'Lucida Sans', sans-serif;
+}
+
+.headline {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+
+  .text {
+    color: var(--clr-button-default);
+  }
 }
 
 .form-container {
@@ -25,7 +36,6 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 3rem 0;
-  font-family: 'Lucida Sans', sans-serif;
 }
 
 .form-register-error {
@@ -41,13 +51,28 @@
 
 .form-fieldset {
   padding: 1em 3em 4em;
-  border: none;
+  border: 0.75rem solid var(--bg-color-bright);
   border-radius: 4px;
+  outline: 2px solid var(--clr-button-default);
   background-color: #e1e1e1;
+
+  legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
 }
 
 .form-legend {
-  font-size: 0;
+  font-size: 10;
+  width: 0;
+  height: 0;
 }
 
 .form-register-input,
@@ -97,76 +122,10 @@
   outline: 3px solid var(--clr-error-outline);
 }
 
-.custom-select-container {
-  position: relative;
-  width: var(--custom-select-width);
-}
-
-.custom-select-value {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem;
-  border: 1px solid var(--text-color-dark);
-  cursor: pointer;
-  user-select: none;
-  background-color: var(--bg-color-bright);
-}
-
-.custom-select-container:focus > .custom-select-value {
-  outline: 1px solid var(--text-color-dark);
-}
-
-.custom-select-value::after {
-  content: '';
-  display: inline-block;
-  margin-left: 0.75rem;
-  margin-top: 0.25rem;
-  border: 4px solid transparent;
-  border-top-color: var(--text-color-dark);
-}
-
-.custom-select-options {
-  position: absolute;
-  display: none;
-  width: var(--custom-select-width);
-  height: var(--custom-select-width);
-  overflow-y: auto;
-  padding: 0;
-  margin: 0;
-  border: 2px solid var(--text-color-dark);
-  border-top: none;
-  /*   list-style-type: none; */
-  background-color: var(--bg-color-bright);
-  /*  transform: translateY(-1rem);
-  transition: transform 0.1s ease-in-out; */
-}
-
-.custom-select-options.show {
-  display: block;
-  /*   transform: translateY(0rem); */
-}
-
-.custom-select-option {
-  padding: 0.25rem 0.5rem;
-  cursor: pointer;
-  user-select: none;
-}
-
-.custom-select-option:hover {
-  background-color: var(--clr-hover-outline);
-}
-
-.custom-select-option.selected {
-  background-color: var(--clr-hover-border);
-  color: var(--bg-color-bright);
-}
-
 .form-register-button {
   display: inline-block;
   margin-top: 1.5em;
   padding: 0.5rem 1rem;
-  font-family: inherit;
   font-size: 1.5em;
   color: var(--bg-color-bright);
   background-color: var(--clr-button-default);
