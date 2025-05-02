@@ -6,6 +6,7 @@ import {
   validatePasswordInput,
   validatePasswordStrength,
 } from './validation.js'
+import { renderErrorMessage } from './renderErrorMessage.js'
 
 import { ERROR_MESSAGES } from '../js/errorMessages.js'
 

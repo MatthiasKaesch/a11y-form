@@ -7,6 +7,7 @@
 
     <link rel="icon" href="../assets/favicon.ico" />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/select.css" />
     <script src="js/script.js" type="module"></script>
   </head>
 
@@ -17,14 +18,19 @@
           <p class="error-msg"></p>
         </template>
 
-        <h1>&#x2192; Join Us!</h1>
+        <h1 class="headline">
+          <img
+            class="headline icon"
+            src="./assets/form_icon.webp"
+            alt=""
+            width="32"
+            height="32"
+            style="vertical-align: middle"
+          />
+          <span class="headline text">Join us today!</span>
+        </h1>
 
-        <form
-          id="form-element"
-          class="form-register"
-          onsubmit="validateFormInputs()"
-          novalidate
-        >
+        <form id="form-element" class="form-register" novalidate>
           <fieldset class="form-fieldset">
             <legend class="form-legend">Personalia</legend>
 
