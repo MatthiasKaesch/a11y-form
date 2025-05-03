@@ -15,6 +15,8 @@ export default class Select {
 
     element.style.display = 'none'
     element.after(this.customElement)
+
+    this.startAutoFillSync()
   }
 
   get selectedOption() {
@@ -87,6 +89,24 @@ export default class Select {
     if (newSelectedOption !== prevSelectedOption) {
       this.customElement.dispatchEvent(new Event('change', { bubbles: true }))
     }
+  }
+
+  startAutoFillSync() {
+    let lastValue = this.element.value
+
+    const sync = () => {
+      const currentValue = this.element.value
+      if (currentValue !== lastValue) {
+        lastValue = currentValue
+        if (currentValue) {
+          this.selectValue(currentValue)
+          // cancelAnimationFrame(this._autoFillFrame)
+          return // Stop Sync Loop after successful autofill
+        }
+      }
+      this._autoFillFrame = requestAnimationFrame(sync)
+    }
+    this._autoFillFrame = requestAnimationFrame(sync)
   }
 }
 
