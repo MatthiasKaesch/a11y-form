@@ -163,9 +163,10 @@
 }
 
 .button-error-message {
-  display: inline-block;
+  display: block;
 
   @media (min-width: 768px) {
+    display: inline-block;
     margin-left: 1rem;
   }
 }
