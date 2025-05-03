@@ -30,17 +30,11 @@
           <span class="headline text">Join us today!</span>
         </h1>
 
-        <form
-          id="form-element"
-          class="form-register"
-          novalidate
-          autocomplete="off"
-          autofill="off"
-        >
+        <form id="form-element" class="form-register" novalidate>
           <fieldset class="form-fieldset">
             <legend class="form-legend">Personalia</legend>
 
-            <!--  <label class="form-register-label" for="fname">First name*</label>
+            <label class="form-register-label" for="fname">First name*</label>
             <div
               id="fname-error"
               role="alert"
@@ -53,6 +47,7 @@
               name="fname"
               data-type="name"
               placeholder="Firstname"
+              autocomplete="name"
             />
 
             <label class="form-register-label" for="lname">Last name*</label>
@@ -68,6 +63,7 @@
               name="lname"
               data-type="name"
               placeholder="Lastname"
+              autocomplete="family-name"
             />
 
             <label class="form-register-label" for="email">Email*</label>
@@ -83,6 +79,7 @@
               name="email"
               data-type="email"
               placeholder="Your Email"
+              autocomplete="email"
             />
 
             <label class="form-register-label" for="password">Password*</label>
@@ -98,7 +95,8 @@
               name="password"
               data-type="password"
               placeholder="Your password"
-            /> -->
+              autocomplete="new-password"
+            />
 
             <label class="form-register-label" for="country" id="label-country"
               >Country*</label
