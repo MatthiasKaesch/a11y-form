@@ -84,7 +84,9 @@ export default class Select {
     }
 
     // add cutsom change event for event listener
+    console.log('Selected:', { newSelectedOption, prevSelectedOption })
     if (newSelectedOption !== prevSelectedOption) {
+      console.log('change dispatch')
       this.customElement.dispatchEvent(new Event('change', { bubbles: true }))
     }
   }

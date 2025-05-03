@@ -39,18 +39,29 @@ formInputs.forEach((input) => {
   }
 })
 
-// Onblur validation for country select
-customSelectContainer.addEventListener('blur', () => {
+// Validation for country select
+const handleCountryValidation = () => {
   clearErrorMessages([countrySelect])
   validateIfCountryWasSelected(countrySelect, true)
   enableSumbitButton()
+}
+
+// Onblur validation for country select
+customSelectContainer.addEventListener('blur', () => {
+  console.log('blur')
+  handleCountryValidation()
 })
 
 // Change validation for country select
 customSelectContainer.addEventListener('change', () => {
-  clearErrorMessages([countrySelect])
-  validateIfCountryWasSelected(countrySelect, true)
-  enableSumbitButton()
+  console.log('change')
+  handleCountryValidation()
+})
+
+// Input validation for country select
+customSelectContainer.addEventListener('input', () => {
+  console.log('input')
+  handleCountryValidation()
 })
 
 // Clear error message(s)
@@ -67,7 +78,7 @@ const clearErrorMessages = (HTMLElements = []) => {
 
 // Validate Inputs
 const validateFormInputs = (inputElements = formInputs) => {
-  clearErrorMessages([...inputElements, countrySelect])
+  clearErrorMessages(inputElements)
 
   // "2nd argument is to render error message"
   checkForEmptyInputs(inputElements, true)
@@ -75,7 +86,6 @@ const validateFormInputs = (inputElements = formInputs) => {
   validateEmailInput(inputElements, true)
   validatePasswordInput(inputElements, true)
   validatePasswordStrength(inputElements, true)
-  validateIfCountryWasSelected(countrySelect, true)
 }
 
 // Check enabling of submitButton

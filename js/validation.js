@@ -139,9 +139,12 @@ export const validatePasswordStrength = (inputData, renderErrorMsg) => {
   return valid
 }
 
-export const validateIfCountryWasSelected = (select, renderErrorMsg) => {
+export const validateIfCountryWasSelected = (
+  select,
+  renderErrorMsg = false,
+) => {
   const value = select.value
-  const isValid = value !== ''
+  const isValid = !!value && value.trim() !== ''
 
   if (!isValid && renderErrorMsg) {
     renderErrorMessage(select, ERROR_MESSAGES[select.name])
