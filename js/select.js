@@ -84,9 +84,7 @@ export default class Select {
     }
 
     // add cutsom change event for event listener
-    console.log('Selected:', { newSelectedOption, prevSelectedOption })
     if (newSelectedOption !== prevSelectedOption) {
-      console.log('change dispatch')
       this.customElement.dispatchEvent(new Event('change', { bubbles: true }))
     }
   }
@@ -153,8 +151,14 @@ function setupCustomElement(select) {
 
   // Open/close toggle
   select.labelElement.addEventListener('click', () => {
+    const wasOpen = select.optionsCustomElement.classList.contains('show')
     const isOpen = select.optionsCustomElement.classList.toggle('show')
     select.customElement.setAttribute('aria-expanded', String(isOpen))
+
+    // Add change event if menu is just open and closed
+    if (wasOpen && !select.selectedOption) {
+      select.customElement.dispatchEvent(new Event('change', { bubbles: true }))
+    }
   })
 
   // Close on blur

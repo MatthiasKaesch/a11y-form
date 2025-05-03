@@ -47,20 +47,12 @@ const handleCountryValidation = () => {
 }
 
 // Onblur validation for country select
-customSelectContainer.addEventListener('blur', () => {
-  console.log('blur')
+customSelectContainer.addEventListener('focusout', () => {
   handleCountryValidation()
 })
 
 // Change validation for country select
 customSelectContainer.addEventListener('change', () => {
-  console.log('change')
-  handleCountryValidation()
-})
-
-// Input validation for country select
-customSelectContainer.addEventListener('input', () => {
-  console.log('input')
   handleCountryValidation()
 })
 
