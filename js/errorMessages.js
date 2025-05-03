@@ -20,5 +20,7 @@ export const ERROR_MESSAGES = {
     missingSpecial:
       'Password must contain at least one special character (!@#$%&*._-)',
   },
+  country: 'Please select a country',
+
   button: 'Not all fields are filled in correctly',
 }

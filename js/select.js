@@ -82,6 +82,11 @@ export default class Select {
       newCustomElement.classList.add('selected')
       newCustomElement.scrollIntoView({ block: 'nearest' })
     }
+
+    // add cutsom change event for event listener
+    if (newSelectedOption !== prevSelectedOption) {
+      this.customElement.dispatchEvent(new Event('change', { bubbles: true }))
+    }
   }
 }
 

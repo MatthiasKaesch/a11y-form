@@ -5,6 +5,7 @@ import {
   validateEmailInput,
   validatePasswordInput,
   validatePasswordStrength,
+  validateIfCountryWasSelected,
 } from './validation.js'
 import { renderErrorMessage } from './renderErrorMessage.js'
 
@@ -13,11 +14,12 @@ import { ERROR_MESSAGES } from '../js/errorMessages.js'
 const form = document.querySelector('#form-element')
 const submitButton = document.querySelector('#submit-button')
 const formInputs = Array.from(form.querySelectorAll('input'))
-
+const countrySelect = document.getElementById('country')
 const selectElements = document.querySelectorAll('[data-custom]')
 selectElements.forEach((selectElement) => {
   new Select(selectElement)
 })
+const customSelectContainer = document.querySelector('.custom-select-container')
 
 // Cancel Form submit
 form.addEventListener('submit', (e) => {
@@ -37,11 +39,26 @@ formInputs.forEach((input) => {
   }
 })
 
+// Onblur validation for country select
+customSelectContainer.addEventListener('blur', () => {
+  clearErrorMessages([countrySelect])
+  validateIfCountryWasSelected(countrySelect, true)
+  enableSumbitButton()
+})
+
+// Change validation for country select
+customSelectContainer.addEventListener('change', () => {
+  clearErrorMessages([countrySelect])
+  validateIfCountryWasSelected(countrySelect, true)
+  enableSumbitButton()
+})
+
 // Clear error message(s)
 const clearErrorMessages = (HTMLElements = []) => {
   HTMLElements.forEach((element) => {
     const errorContainer = document.getElementById(`${element.name}-error`)
     element.removeAttribute('aria-invalid')
+
     if (errorContainer) {
       errorContainer.innerHTML = ''
     }
@@ -50,7 +67,7 @@ const clearErrorMessages = (HTMLElements = []) => {
 
 // Validate Inputs
 const validateFormInputs = (inputElements = formInputs) => {
-  clearErrorMessages(inputElements)
+  clearErrorMessages([...inputElements, countrySelect])
 
   // "2nd argument is to render error message"
   checkForEmptyInputs(inputElements, true)
@@ -58,6 +75,7 @@ const validateFormInputs = (inputElements = formInputs) => {
   validateEmailInput(inputElements, true)
   validatePasswordInput(inputElements, true)
   validatePasswordStrength(inputElements, true)
+  validateIfCountryWasSelected(countrySelect, true)
 }
 
 // Check enabling of submitButton
@@ -71,6 +89,7 @@ const enableSumbitButton = (renderErrorMsg = false) => {
     validateEmailInput(formInputs, false),
     validatePasswordInput(formInputs, false),
     validatePasswordStrength(formInputs, false),
+    validateIfCountryWasSelected(countrySelect, false),
   ]
 
   const enableSubmitButton = requirements.some((requirement) => {
