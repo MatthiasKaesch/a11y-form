@@ -13,7 +13,9 @@ import { ERROR_MESSAGES } from '../js/errorMessages.js'
 
 const form = document.querySelector('#form-element')
 const submitButton = document.querySelector('#submit-button')
-const formInputs = Array.from(form.querySelectorAll('input'))
+const formInputs = Array.from(
+  form.querySelectorAll('input:not([name="company"])'),
+)
 const countrySelect = document.getElementById('country')
 const selectElements = document.querySelectorAll('[data-custom]')
 selectElements.forEach((selectElement) => {
@@ -26,6 +28,14 @@ form.addEventListener('submit', (e) => {
   e.preventDefault()
 
   validateFormInputs()
+  handleCountryValidation()
+
+  const honeypot = form.querySelector('[name="company"]')
+  if (honeypot.value.trim() !== '') {
+    console.warn('Bot detected - form not submitted.')
+    return
+  }
+
   if (!enableSumbitButton(true)) {
     alert('Submitted succesfully')
   }
@@ -70,6 +80,7 @@ const clearErrorMessages = (HTMLElements = []) => {
 
 // Validate Inputs
 const validateFormInputs = (inputElements = formInputs) => {
+  console.log(inputElements)
   clearErrorMessages(inputElements)
 
   // "2nd argument is to render error message"

@@ -30,7 +30,13 @@
           <span class="headline text">Join us today!</span>
         </h1>
 
-        <form id="form-element" class="form-register" novalidate>
+        <form
+          id="form-element"
+          class="form-register"
+          novalidate
+          aria-label="Registration form"
+          autocomplete="off"
+        >
           <fieldset class="form-fieldset">
             <legend class="form-legend">Personalia</legend>
 
@@ -81,6 +87,19 @@
               placeholder="Your Email"
               autocomplete="email"
             />
+
+            <div class="sr-only">
+              <label for="company">Leave this field empty</label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                autocomplete="username"
+                tabindex="-1"
+                aria-hidden="true"
+                autocomplete="off"
+              />
+            </div>
 
             <label class="form-register-label" for="password">Password*</label>
             <div
