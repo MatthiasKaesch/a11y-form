@@ -5,6 +5,7 @@
   --clr-button-default: #ff5905;
   --clr-button-hover: #ff8547;
   --clr-button-disabled: #6f6f6f;
+  --clr-button-disabled-hover: #808080;
 
   --clr-hover-border: #508aa8;
   --clr-hover-outline: #60b8e3;
@@ -131,11 +132,13 @@
   background-color: var(--clr-button-default);
   border: 1px solid var(--clr-button-default);
   cursor: pointer;
+  transition: transform 0.15s ease, color 0.2s ease, background-color 0.2s ease;
 }
 
-.form-register-button:hover {
+.form-register-button:not([aria-disabled='true']):hover {
   color: var(--text-color-dark);
   background-color: var(--clr-button-hover);
+  transform: scale(1.1);
 }
 
 .form-register-button[aria-disabled='true'] {
@@ -143,6 +146,11 @@
   background-color: var(--clr-button-disabled);
   border-color: var(--clr-button-disabled);
   cursor: not-allowed;
+}
+
+.form-register-button[aria-disabled='true']:hover {
+  background-color: var(--clr-button-disabled-hover);
+  transform: scale(1.1);
 }
 
 .button-error-message {
