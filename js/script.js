@@ -80,7 +80,6 @@ const clearErrorMessages = (HTMLElements = []) => {
 
 // Validate Inputs
 const validateFormInputs = (inputElements = formInputs) => {
-  console.log(inputElements)
   clearErrorMessages(inputElements)
 
   // "2nd argument is to render error message"
