@@ -97,7 +97,7 @@ const enableSumbitButton = (renderErrorMsg = false) => {
   })
 
   if (enableSubmitButton) {
-    submitButton.setAttribute('aria-disabled', '')
+    submitButton.setAttribute('aria-disabled', 'true')
     if (renderErrorMsg) {
       renderErrorMessage(submitButton, ERROR_MESSAGES.button)
     }
