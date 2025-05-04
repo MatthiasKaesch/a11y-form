@@ -9,9 +9,15 @@
   justify-content: space-between;
   padding: 0.5rem;
   border: 1px solid var(--text-color-dark);
+
   cursor: pointer;
   user-select: none;
   background-color: var(--bg-color-bright);
+}
+
+.custom-select-container[aria-invalid] .custom-select-value {
+  border: 2px solid var(--clr-error-highlight);
+  background-color: var(--clr-error-background);
 }
 
 .custom-select-container:focus > .custom-select-value {
