@@ -14,7 +14,7 @@
   --clr-error-outline: #ff5c5c;
   --clr-error-background: #ffd6d6;
 
-  --custom-select-width: 250px;
+  --custom-select-width: 350px;
 }
 
 .form-container,
@@ -134,7 +134,7 @@
 
 .form-register-button {
   display: inline-block;
-  margin-top: 1.5rem;
+  margin-top: 3rem;
   padding: 0.5rem 1rem;
   font-size: 1.5rem;
   color: var(--bg-color-bright);
