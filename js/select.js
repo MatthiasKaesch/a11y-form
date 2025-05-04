@@ -145,7 +145,7 @@ function setupCustomElement(select) {
   select.optionsCustomElement.setAttribute('id', `listbox-${select.element.id}`)
 
   // Create custom options
-  select.options.forEach((option) => {
+  select.options.forEach((option, index) => {
     if (option.isPlaceholder) return
     const optionElement = document.createElement('li')
     optionElement.classList.add('custom-select-option')
@@ -157,6 +157,9 @@ function setupCustomElement(select) {
     optionElement.id = `option-${option.value}`
     optionElement.dataset.value = option.value
     optionElement.innerText = option.label
+
+    // animation delay
+    optionElement.style.animationDelay = `${index * 15}ms`
 
     if (option.selected) optionElement.classList.add('selected')
 

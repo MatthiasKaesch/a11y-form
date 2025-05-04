@@ -28,10 +28,6 @@
   align-items: center;
   margin: 0.5rem 0;
 
-  @media (min-width: 768px) {
-    margin: 1rem 0;
-  }
-
   .text {
     color: var(--clr-button-default);
   }
@@ -45,7 +41,6 @@
     width: 60%;
     max-width: 800px;
     margin: 0 auto;
-    padding: 3rem 0;
   }
 }
 

@@ -46,15 +46,7 @@
   overflow-y: auto;
   padding: 0.25rem 0;
   margin: 0 0 2rem;
-  border: 2px solid var(--text-color-dark);
-  border-top: none;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  background: linear-gradient(
-    125deg,
-    var(--bg-color-bright) 20%,
-    var(--clr-button-hover)
-  );
+
   transition: opacity 0.2s ease;
 }
 
@@ -63,21 +55,37 @@
 }
 
 .custom-select-option {
-  padding: 0.25rem 0.5rem;
+  opacity: 0;
+  padding: 0.4rem 0.5rem;
   cursor: pointer;
   user-select: none;
+  background: linear-gradient(
+    145deg,
+    var(--bg-color-bright) 20%,
+    var(--clr-button-hover)
+  );
 }
 
 .custom-select-option.selected {
-  background-color: var(--clr-button-default);
+  background: var(--clr-button-default);
   color: var(--bg-color-bright);
 }
 
 .custom-select-option:hover {
   color: var(--text-color-dark);
-  background: linear-gradient(
-    125deg,
-    var(--bg-color-bright) 30%,
-    var(--clr-button-default)
-  );
+}
+
+@keyframes optionsFlyIn {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.custom-select-options.show .custom-select-option {
+  animation: optionsFlyIn 0.3s ease forwards;
 }
