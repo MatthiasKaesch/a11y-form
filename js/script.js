@@ -75,6 +75,14 @@ const clearErrorMessages = (HTMLElements = []) => {
     if (errorContainer) {
       errorContainer.innerHTML = ''
     }
+
+    if (element.tagName === 'SELECT') {
+      const customSelect = element.nextElementSibling
+      if (customSelect?.classList.contains('custom-select-container')) {
+        customSelect.removeAttribute('aria-invalid')
+        customSelect.removeAttribute('aria-describedby')
+      }
+    }
   })
 }
 

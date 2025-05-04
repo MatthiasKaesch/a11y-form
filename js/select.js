@@ -163,6 +163,7 @@ function setupCustomElement(select) {
     optionElement.addEventListener('click', () => {
       select.selectValue(option.value)
       select.optionsCustomElement.classList.remove('show')
+      select.customElement.setAttribute('aria-expanded', 'false')
     })
     select.optionsCustomElement.append(optionElement)
   })
