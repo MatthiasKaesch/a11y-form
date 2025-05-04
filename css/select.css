@@ -40,6 +40,8 @@
 .custom-select-options {
   position: absolute;
   opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
   width: var(--custom-select-width);
   height: var(--custom-select-width);
   font-size: 1.25rem;
@@ -58,6 +60,8 @@
 
 .custom-select-options.show {
   opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
 }
 
 .custom-select-option {
