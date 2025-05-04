@@ -43,11 +43,17 @@
   width: var(--custom-select-width);
   height: var(--custom-select-width);
   font-size: 1.25rem;
+  list-style-type: none;
   overflow-y: auto;
-  padding: 0.25rem 0;
+  padding: 1px 0;
   margin: 0 0 2rem;
-
   transition: opacity 0.2s ease;
+  scrollbar-color: black transparent;
+  scrollbar-width: thick;
+}
+
+.custom-select-options::-webkit-scrollbar {
+  width: 8px;
 }
 
 .custom-select-options.show {
@@ -60,19 +66,64 @@
   cursor: pointer;
   user-select: none;
   background: linear-gradient(
-    145deg,
-    var(--bg-color-bright) 20%,
+    90deg,
+    var(--clr-button-hover),
+    var(--clr-button-hover) 1%,
+    var(--bg-color-bright) 1%,
+    var(--bg-color-bright) 30%,
+    var(--clr-button-hover) 92%,
+    var(--clr-button-hover) 94%,
+    var(--bg-color-bright) 94%,
+    var(--bg-color-bright) 95%,
+    var(--clr-button-hover) 95%,
+    var(--clr-button-hover) 96%,
+    var(--bg-color-bright) 96%,
+    var(--bg-color-bright) 97%,
+    var(--clr-button-hover) 97%,
     var(--clr-button-hover)
   );
 }
 
 .custom-select-option.selected {
-  background: var(--clr-button-default);
-  color: var(--bg-color-bright);
+  box-sizing: border-box;
+  background: linear-gradient(
+    90deg,
+    var(--clr-hover-outline),
+    var(--clr-hover-outline) 1%,
+    var(--bg-color-bright) 1%,
+    var(--bg-color-bright) 30%,
+    var(--clr-hover-outline) 92%,
+    var(--clr-hover-outline) 94%,
+    var(--bg-color-bright) 94%,
+    var(--bg-color-bright) 95%,
+    var(--clr-hover-outline) 95%,
+    var(--clr-hover-outline) 96%,
+    var(--bg-color-bright) 96%,
+    var(--bg-color-bright) 97%,
+    var(--clr-hover-outline) 97%,
+    var(--clr-hover-outline)
+  );
+  border-bottom: 2px solid var(--clr-hover-outline);
 }
 
 .custom-select-option:hover {
-  color: var(--text-color-dark);
+  background: linear-gradient(
+    90deg,
+    var(--clr-hover-outline),
+    var(--clr-hover-outline) 1%,
+    var(--bg-color-bright) 1%,
+    var(--bg-color-bright) 25%,
+    var(--clr-button-default) 92%,
+    var(--clr-button-default) 94%,
+    var(--bg-color-bright) 94%,
+    var(--bg-color-bright) 95%,
+    var(--clr-button-default) 95%,
+    var(--clr-button-default) 96%,
+    var(--bg-color-bright) 96%,
+    var(--bg-color-bright) 97%,
+    var(--clr-button-default) 97%,
+    var(--clr-button-default)
+  );
 }
 
 @keyframes optionsFlyIn {
