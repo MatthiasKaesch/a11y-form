@@ -1,16 +1,19 @@
 .custom-select-container {
   position: relative;
-  width: var(--custom-select-width);
+  width: auto;
+  max-width: var(--custom-select-width);
 }
 
 .custom-select-value {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 50px;
   padding: 0.5rem;
   font-size: 1.25rem;
   background-color: var(--bg-color-bright);
-  border: 1px solid var(--text-color-dark);
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
   cursor: pointer;
   user-select: none;
 }
@@ -40,18 +43,27 @@
 .custom-select-options {
   position: absolute;
   opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  width: var(--custom-select-width);
-  height: var(--custom-select-width);
+  margin: 0 0 2rem;
+  padding: 1px 0;
+
+  width: 100%;
+  max-width: var(--custom-select-width);
+  height: var(--custom-select-height);
   font-size: 1.25rem;
   list-style-type: none;
+  border-bottom: none;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+
   overflow-y: auto;
-  padding: 1px 0;
-  margin: 0 0 2rem;
+  pointer-events: none;
+  visibility: hidden;
   transition: opacity 0.2s ease;
   scrollbar-color: black transparent;
-  scrollbar-width: thick;
+
+  @media (min-width: 768px) {
+    height: var(--custom-select-height);
+  }
 }
 
 .custom-select-options::-webkit-scrollbar {
@@ -62,6 +74,7 @@
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
+  border-color: var(--clr-button-default);
 }
 
 .custom-select-option {

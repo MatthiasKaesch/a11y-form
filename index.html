@@ -38,144 +38,159 @@
           autocomplete="on"
         >
           <fieldset class="form-fieldset">
-            <legend class="form-legend">Personalia</legend>
+            <div class="form-border-1">
+              <div class="form-border-2">
+                <div class="form-border-3">
+                  <legend class="form-legend">Personalia</legend>
 
-            <label class="form-register-label" for="fname">First name*</label>
-            <div
-              id="fname-error"
-              role="alert"
-              class="form-register-error"
-            ></div>
-            <input
-              class="form-register-input"
-              type="text"
-              id="fname"
-              name="fname"
-              data-type="name"
-              placeholder="Firstname"
-              autocomplete="name"
-            />
+                  <label class="form-register-label" for="fname"
+                    >First name*</label
+                  >
+                  <div
+                    id="fname-error"
+                    role="alert"
+                    class="form-register-error"
+                  ></div>
+                  <input
+                    class="form-register-input"
+                    type="text"
+                    id="fname"
+                    name="fname"
+                    data-type="name"
+                    placeholder="Firstname"
+                    autocomplete="name"
+                  />
 
-            <label class="form-register-label" for="lname">Last name*</label>
-            <div
-              id="lname-error"
-              class="form-register-error"
-              role="alert"
-            ></div>
-            <input
-              class="form-register-input"
-              type="text"
-              id="lname"
-              name="lname"
-              data-type="name"
-              placeholder="Lastname"
-              autocomplete="family-name"
-            />
+                  <label class="form-register-label" for="lname"
+                    >Last name*</label
+                  >
+                  <div
+                    id="lname-error"
+                    class="form-register-error"
+                    role="alert"
+                  ></div>
+                  <input
+                    class="form-register-input"
+                    type="text"
+                    id="lname"
+                    name="lname"
+                    data-type="name"
+                    placeholder="Lastname"
+                    autocomplete="family-name"
+                  />
 
-            <label class="form-register-label" for="email">Email*</label>
-            <div
-              id="email-error"
-              class="form-register-error"
-              role="alert"
-            ></div>
-            <input
-              class="form-register-input"
-              type="email"
-              id="email"
-              name="email"
-              data-type="email"
-              placeholder="Your Email"
-              autocomplete="email"
-            />
+                  <label class="form-register-label" for="email">Email*</label>
+                  <div
+                    id="email-error"
+                    class="form-register-error"
+                    role="alert"
+                  ></div>
+                  <input
+                    class="form-register-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    data-type="email"
+                    placeholder="Your Email"
+                    autocomplete="email"
+                  />
 
-            <div class="sr-only">
-              <label for="company">Leave this field empty</label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                autocomplete="username"
-                tabindex="-1"
-                aria-hidden="true"
-                autocomplete="off"
-              />
+                  <div class="sr-only">
+                    <label for="company">Leave this field empty</label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      autocomplete="username"
+                      tabindex="-1"
+                      aria-hidden="true"
+                      autocomplete="off"
+                    />
+                  </div>
+
+                  <label
+                    class="form-register-label"
+                    for="country"
+                    id="label-country"
+                    >Country*</label
+                  >
+                  <div
+                    id="country-error"
+                    class="form-register-error"
+                    role="alert"
+                  ></div>
+                  <select
+                    class="form-register-select"
+                    name="country"
+                    id="country"
+                    data-custom
+                  >
+                    <option value="" disabled selected hidden>
+                      Please select a country
+                    </option>
+                    <option value="at">Austria</option>
+                    <option value="be">Belgium</option>
+                    <option value="bg">Bulgaria</option>
+                    <option value="hr">Croatia</option>
+                    <option value="cy">Cyprus</option>
+                    <option value="cz">Czech Republic</option>
+                    <option value="dk">Denmark</option>
+                    <option value="ee">Estonia</option>
+                    <option value="fi">Finland</option>
+                    <option value="fr">France</option>
+                    <option value="de">Germany</option>
+                    <option value="gr">Greece</option>
+                    <option value="hu">Hungary</option>
+                    <option value="ie">Ireland</option>
+                    <option value="it">Italy</option>
+                    <option value="lv">Latvia</option>
+                    <option value="lt">Lithuania</option>
+                    <option value="lu">Luxembourg</option>
+                    <option value="mt">Malta</option>
+                    <option value="nl">Netherlands</option>
+                    <option value="pl">Poland</option>
+                    <option value="pt">Portugal</option>
+                    <option value="ro">Romania</option>
+                    <option value="sk">Slovakia</option>
+                    <option value="si">Slovenia</option>
+                    <option value="es">Spain</option>
+                    <option value="se">Sweden</option>
+                  </select>
+
+                  <label class="form-register-label" for="password"
+                    >Password*</label
+                  >
+                  <div
+                    id="password-error"
+                    class="form-register-error"
+                    role="alert"
+                  ></div>
+                  <input
+                    class="form-register-input"
+                    type="password"
+                    id="password"
+                    name="password"
+                    data-type="password"
+                    placeholder="Your password"
+                    autocomplete="new-password"
+                  />
+
+                  <button
+                    id="submit-button"
+                    class="form-register-button"
+                    type="submit"
+                    name="button"
+                    aria-disabled="false"
+                  >
+                    Register
+                  </button>
+                  <div
+                    id="button-error"
+                    class="form-register-error button-error-message"
+                  ></div>
+                </div>
+              </div>
             </div>
-
-            <label class="form-register-label" for="country" id="label-country"
-              >Country*</label
-            >
-            <div
-              id="country-error"
-              class="form-register-error"
-              role="alert"
-            ></div>
-            <select
-              class="form-register-select"
-              name="country"
-              id="country"
-              data-custom
-            >
-              <option value="" disabled selected hidden>
-                Please select a country
-              </option>
-              <option value="at">Austria</option>
-              <option value="be">Belgium</option>
-              <option value="bg">Bulgaria</option>
-              <option value="hr">Croatia</option>
-              <option value="cy">Cyprus</option>
-              <option value="cz">Czech Republic</option>
-              <option value="dk">Denmark</option>
-              <option value="ee">Estonia</option>
-              <option value="fi">Finland</option>
-              <option value="fr">France</option>
-              <option value="de">Germany</option>
-              <option value="gr">Greece</option>
-              <option value="hu">Hungary</option>
-              <option value="ie">Ireland</option>
-              <option value="it">Italy</option>
-              <option value="lv">Latvia</option>
-              <option value="lt">Lithuania</option>
-              <option value="lu">Luxembourg</option>
-              <option value="mt">Malta</option>
-              <option value="nl">Netherlands</option>
-              <option value="pl">Poland</option>
-              <option value="pt">Portugal</option>
-              <option value="ro">Romania</option>
-              <option value="sk">Slovakia</option>
-              <option value="si">Slovenia</option>
-              <option value="es">Spain</option>
-              <option value="se">Sweden</option>
-            </select>
-
-            <label class="form-register-label" for="password">Password*</label>
-            <div
-              id="password-error"
-              class="form-register-error"
-              role="alert"
-            ></div>
-            <input
-              class="form-register-input"
-              type="password"
-              id="password"
-              name="password"
-              data-type="password"
-              placeholder="Your password"
-              autocomplete="new-password"
-            />
-
-            <button
-              id="submit-button"
-              class="form-register-button"
-              type="submit"
-              name="button"
-              aria-disabled="false"
-            >
-              Register
-            </button>
-            <div
-              id="button-error"
-              class="form-register-error button-error-message"
-            ></div>
           </fieldset>
         </form>
       </div>
