@@ -1,7 +1,7 @@
 import { ERROR_MESSAGES } from './errorMessages.js'
 import { renderErrorMessage } from './renderErrorMessage.js'
 
-export const checkForEmptyInputs = (inputData, renderErrorMsg) => {
+export const checkForEmptyInputs = (inputData, renderErrorMsg = false) => {
   let valid = true
   inputData.forEach((input) => {
     if (input.value.trim() === '') {
@@ -10,6 +10,7 @@ export const checkForEmptyInputs = (inputData, renderErrorMsg) => {
       renderErrorMessage(input, ERROR_MESSAGES[input.name].empty)
     }
   })
+
   return valid
 }
 
