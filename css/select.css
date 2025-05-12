@@ -2,6 +2,7 @@
   position: relative;
   width: auto;
   max-width: var(--custom-select-width);
+  z-index: 1;
 }
 
 .custom-select-value {
