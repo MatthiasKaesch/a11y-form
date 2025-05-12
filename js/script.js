@@ -22,6 +22,8 @@ selectElements.forEach((selectElement) => {
   new Select(selectElement)
 })
 const customSelectContainer = document.querySelector('.custom-select-container')
+const toggleBtn = document.querySelector('.toggle-password')
+const passwordInput = document.getElementById('password')
 
 // Cancel Form submit
 form.addEventListener('submit', (e) => {
@@ -85,6 +87,17 @@ const clearErrorMessages = (HTMLElements = []) => {
     }
   })
 }
+
+// Toggle password visiblity
+toggleBtn.addEventListener('click', () => {
+  const isPassword = passwordInput.type === 'password'
+  passwordInput.type = isPassword ? 'text' : 'password'
+  toggleBtn.setAttribute(
+    'aria-label',
+    isPassword ? 'Hide password' : 'Show password',
+  )
+  toggleBtn.setAttribute('aria-pressed', String(!isPassword))
+})
 
 // Validate Inputs
 const validateFormInputs = (inputElements = formInputs) => {
