@@ -102,7 +102,7 @@ const updatePasswordChecklist = (value) => {
   ruleItems.special.classList.toggle('valid', /[!@#$%&*._-]/.test(value))
 }
 
-export const validatePasswordStrength = (inputData, renderErrorMsg) => {
+export const validatePasswordStrength = (inputData) => {
   let valid = true
 
   // Run validation
@@ -120,6 +120,12 @@ export const validatePasswordStrength = (inputData, renderErrorMsg) => {
       !/[!@#$%&*._-]/.test(value)
     ) {
       valid = false
+    }
+
+    if (!valid) {
+      input.setAttribute('aria-invalid', true)
+    } else {
+      input.setAttribute('aria-invalid', false)
     }
   })
 
