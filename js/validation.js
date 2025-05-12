@@ -75,64 +75,50 @@ export const validatePasswordInput = (inputData, renderErrorMsg) => {
   return valid
 }
 
+// password rules check setup
+let hasAttachedInputListener = false
+const passwordInput = document.getElementById('password')
+if (!hasAttachedInputListener) {
+  passwordInput.addEventListener('input', (e) => {
+    updatePasswordChecklist(e.target.value)
+  })
+  hasAttachedInputListener = true
+}
+
+// rules
+const ruleItems = {
+  length: document.querySelector('[data-rule="length"]'),
+  uppercase: document.querySelector('[data-rule="uppercase"]'),
+  number: document.querySelector('[data-rule="number"]'),
+  special: document.querySelector('[data-rule="special"]'),
+}
+
+// update checklist
+const updatePasswordChecklist = (value) => {
+  ruleItems.length.classList.toggle('valid', value.length >= 8)
+  ruleItems.uppercase.classList.toggle('valid', /[A-Z]/.test(value))
+  ruleItems.number.classList.toggle('valid', /\d/.test(value))
+  ruleItems.special.classList.toggle('valid', /[!@#$%&*._-]/.test(value))
+}
+
 export const validatePasswordStrength = (inputData, renderErrorMsg) => {
   let valid = true
 
-  const minLength = 8
-  const allowedCharsRegex = /^[A-Za-z0-9!@#$%&*._-]+$/
-  const hasNumber = /\d/
-  const hasSpecial = /[!@#$%&*._-]/
-  const hasUppercase = /[A-Z]/
-
+  // Run validation
   inputData.forEach((input) => {
     if (!checkForEmptyInputs([input])) return
     if (input.name !== 'password') return
 
     const value = input.value.trim()
+    updatePasswordChecklist(value)
 
-    if (value.length < minLength) {
+    if (
+      value.length < 8 ||
+      !/[A-Z]/.test(value) ||
+      !/\d/.test(value) ||
+      !/[!@#$%&*._-]/.test(value)
+    ) {
       valid = false
-      if (renderErrorMsg) {
-        renderErrorMessage(input, 'Password must be at least 8 characters long')
-      }
-    }
-
-    if (!hasUppercase.test(value)) {
-      valid = false
-      if (renderErrorMsg) {
-        renderErrorMessage(
-          input,
-          'Password must contain at least one uppercase letter',
-        )
-      }
-    }
-
-    if (!hasNumber.test(value)) {
-      valid = false
-      if (renderErrorMsg) {
-        renderErrorMessage(input, 'Password must contain at least one number')
-      }
-    }
-
-    if (!hasSpecial.test(value)) {
-      valid = false
-      if (renderErrorMsg) {
-        renderErrorMessage(
-          input,
-          'Password must contain at least one special character (!@#$%&*._-)',
-        )
-      }
-    }
-
-    if (!allowedCharsRegex.test(value)) {
-      valid = false
-      if (renderErrorMsg) {
-        renderErrorMessage(
-          input,
-          ERROR_MESSAGES[input.name]?.invalid ||
-            'Password contains invalid characters',
-        )
-      }
     }
   })
 
