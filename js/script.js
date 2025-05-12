@@ -45,8 +45,8 @@ form.addEventListener('submit', (e) => {
 
 // Onblur validation for each input
 formInputs.forEach((input) => {
-  input.onblur = (e) => {
-    validateFormInputs([e.target])
+  input.onblur = () => {
+    validateFormInputs([input])
     enableSumbitButton()
   }
 })
@@ -89,13 +89,14 @@ const clearErrorMessages = (HTMLElements = []) => {
 }
 
 // Toggle password visiblity
-toggleBtn.addEventListener('click', () => {
+toggleBtn.addEventListener('click', (e) => {
   const isPassword = passwordInput.type === 'password'
   passwordInput.type = isPassword ? 'text' : 'password'
   toggleBtn.setAttribute(
     'aria-label',
     isPassword ? 'Hide password' : 'Show password',
   )
+
   toggleBtn.setAttribute('aria-pressed', String(!isPassword))
 })
 
