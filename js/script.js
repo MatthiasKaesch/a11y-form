@@ -109,7 +109,7 @@ const validateFormInputs = (inputElements = formInputs) => {
   checkForShortInputs(inputElements, true)
   validateEmailInput(inputElements, true)
   validatePasswordInput(inputElements, true)
-  validatePasswordStrength(inputElements, true)
+  validatePasswordStrength(inputElements)
 }
 
 // Check enabling of submitButton
@@ -122,7 +122,7 @@ const enableSumbitButton = (renderErrorMsg = false) => {
     checkForShortInputs(formInputs, false),
     validateEmailInput(formInputs, false),
     validatePasswordInput(formInputs, false),
-    validatePasswordStrength(formInputs, false),
+    validatePasswordStrength(formInputs),
     validateIfCountryWasSelected(countrySelect, false),
   ]
 
