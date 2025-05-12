@@ -143,12 +143,12 @@
   border-color: var(--clr-hover-border);
 }
 
-.form-register-input[aria-invalid] {
+.form-register-input[aria-invalid='true'] {
   border-color: var(--clr-error-highlight);
   background-color: var(--clr-error-background);
 }
 
-.form-register-input[aria-invalid]:hover {
+.form-register-input[aria-invalid='true']:hover {
   border-color: var(--clr-error-highlight);
   outline: 3px solid var(--clr-error-outline);
 }
