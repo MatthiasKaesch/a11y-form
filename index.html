@@ -6,8 +6,10 @@
     <title>Accessible Form</title>
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/password.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/select.css" />
+
     <script src="js/script.js" type="module"></script>
   </head>
 
@@ -165,15 +167,49 @@
                     class="form-register-error"
                     role="alert"
                   ></div>
-                  <input
-                    class="form-register-input"
-                    type="password"
-                    id="password"
-                    name="password"
-                    data-type="password"
-                    placeholder="Your password"
-                    autocomplete="new-password"
-                  />
+                  <div class="password-input-wrapper">
+                    <input
+                      class="form-register-input"
+                      type="password"
+                      id="password"
+                      name="password"
+                      data-type="password"
+                      placeholder="Your password"
+                      autocomplete="new-password"
+                    />
+                    <button
+                      type="button"
+                      class="toggle-password"
+                      aria-label="Show password"
+                      aria-pressed="false"
+                    >
+                      <img
+                        src="./assets/showPassword.svg"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
+
+                  <ul
+                    id="password-rules"
+                    class="password-rules"
+                    aria-live="polite"
+                  >
+                    <li data-rule="length">
+                      Password must be at least 8 characters long
+                    </li>
+                    <li data-rule="uppercase">
+                      Password must contain at least one uppercase letter
+                    </li>
+                    <li data-rule="number">
+                      Password must contain at least one number
+                    </li>
+                    <li data-rule="special">
+                      Password must contain at least one special character
+                      (!@#$%&*._-)
+                    </li>
+                  </ul>
 
                   <button
                     id="submit-button"
