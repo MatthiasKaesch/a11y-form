@@ -50,6 +50,20 @@ export const validateEmailInput = (inputData, renderErrorMsg) => {
   return valid
 }
 
+export const validateIfCountryWasSelected = (
+  select,
+  renderErrorMsg = false,
+) => {
+  const value = select.value
+  const isValid = !!value && value.trim() !== ''
+
+  if (!isValid && renderErrorMsg) {
+    renderErrorMessage(select, ERROR_MESSAGES[select.name])
+  }
+
+  return isValid
+}
+
 export const validatePasswordInput = (inputData, renderErrorMsg) => {
   let valid = true
 
@@ -130,18 +144,4 @@ export const validatePasswordStrength = (inputData) => {
   })
 
   return valid
-}
-
-export const validateIfCountryWasSelected = (
-  select,
-  renderErrorMsg = false,
-) => {
-  const value = select.value
-  const isValid = !!value && value.trim() !== ''
-
-  if (!isValid && renderErrorMsg) {
-    renderErrorMessage(select, ERROR_MESSAGES[select.name])
-  }
-
-  return isValid
 }
