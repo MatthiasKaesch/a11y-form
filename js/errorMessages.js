@@ -11,10 +11,14 @@ export const ERROR_MESSAGES = {
     empty: 'Email is required',
     invalid: 'Please enter a valid email address',
   },
+  country: 'Please select a country',
   password: {
     empty: 'Password is required',
   },
-  country: 'Please select a country',
+  confirmPassword: {
+    empty: 'Please repeat your password',
+    mismatch: 'Passwords do not match',
+  },
 
   button: 'Not all fields are filled in correctly',
 }
