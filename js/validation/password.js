@@ -9,11 +9,7 @@ export const validatePasswordInput = (input, renderErrorMsg) => {
   if (!allowedPasswordRegex.test(value)) {
     valid = false
     if (renderErrorMsg) {
-      renderErrorMessage(
-        input,
-        ERROR_MESSAGES[input.name]?.invalid ||
-          'Password contains invalid characters',
-      )
+      renderErrorMessage(input, ERROR_MESSAGES[input.name]?.invalid)
     }
   }
 
@@ -52,6 +48,7 @@ export const validatePasswordStrength = (
   passwordInputHasBeenTouched,
 ) => {
   if (!passwordInputHasBeenTouched) return
+  if (!validatePasswordInput(input)) return
 
   let valid = true
 
@@ -71,10 +68,7 @@ export const validatePasswordStrength = (
   if (!valid) {
     input.setAttribute('aria-invalid', true)
     if (renderErrorMsg) {
-      renderErrorMessage(
-        input,
-        'Your password is missing one or more required elements',
-      )
+      renderErrorMessage(input, ERROR_MESSAGES[input.name].mismatch)
     }
   } else {
     input.setAttribute('aria-invalid', false)

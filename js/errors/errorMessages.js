@@ -14,6 +14,8 @@ export const ERROR_MESSAGES = {
   country: 'Please select a country',
   password: {
     empty: 'Password is required',
+    invalid: 'Password contains invalid characters',
+    mismatch: 'Your password is missing one or more required elements',
   },
   confirmPassword: {
     empty: 'Please repeat your password',
