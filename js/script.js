@@ -55,12 +55,12 @@ formInputs.forEach((input) => {
     }
 
     if (name === 'password') {
+      passwordInputHasBeenTouched = true
       const isNotEmpty = checkForEmptyInputs([input], true)
       if (isNotEmpty) {
         validatePasswordInput(input, true)
-        validatePasswordStrength(input, passwordInputHasBeenTouched)
+        validatePasswordStrength(input, true, passwordInputHasBeenTouched)
       }
-      passwordInputHasBeenTouched = true
     }
 
     if (name === 'confirm-password') {
@@ -72,8 +72,6 @@ formInputs.forEach((input) => {
       const isNotEmpty = checkForEmptyInputs([input], true)
       if (isNotEmpty) checkForShortInputs([input], true)
     }
-
-    enableSumbitButton()
   }
 })
 
@@ -135,7 +133,7 @@ const validateFormInputs = (inputElements = formInputs) => {
   checkForShortInputs(inputElements, true)
   validateEmailInput(inputElements, true)
   validatePasswordInput(passwordInput, true)
-  validatePasswordStrength(passwordInput, passwordInputHasBeenTouched)
+  validatePasswordStrength(passwordInput, true, passwordInputHasBeenTouched)
 }
 
 // Check enabling of submitButton
@@ -148,7 +146,7 @@ const enableSumbitButton = (renderErrorMsg = false) => {
     checkForShortInputs(formInputs, false),
     validateEmailInput(formInputs, false),
     validatePasswordInput(passwordInput, false),
-    validatePasswordStrength(passwordInput, passwordInputHasBeenTouched),
+    validatePasswordStrength(passwordInput, false, passwordInputHasBeenTouched),
     validateIfCountryWasSelected(countrySelect, false),
   ]
 

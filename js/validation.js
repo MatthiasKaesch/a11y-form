@@ -109,9 +109,12 @@ const updatePasswordChecklist = (value) => {
 
 export const validatePasswordStrength = (
   input,
+  renderErrorMsg,
   passwordInputHasBeenTouched,
 ) => {
   if (!passwordInputHasBeenTouched) return
+  console.log('validatePasswordStrength')
+  console.log('RENDER?:', renderErrorMsg)
   let valid = true
 
   // Run validation
@@ -129,6 +132,12 @@ export const validatePasswordStrength = (
 
   if (!valid) {
     input.setAttribute('aria-invalid', true)
+    if (renderErrorMsg) {
+      renderErrorMessage(
+        input,
+        'Your password is missing one or more required elements',
+      )
+    }
   } else {
     input.setAttribute('aria-invalid', false)
   }
