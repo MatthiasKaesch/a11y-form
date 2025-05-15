@@ -113,8 +113,7 @@ export const validatePasswordStrength = (
   passwordInputHasBeenTouched,
 ) => {
   if (!passwordInputHasBeenTouched) return
-  console.log('validatePasswordStrength')
-  console.log('RENDER?:', renderErrorMsg)
+
   let valid = true
 
   // Run validation
