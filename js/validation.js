@@ -17,7 +17,6 @@ export const checkForEmptyInputs = (inputData, renderErrorMsg = false) => {
 export const checkForShortInputs = (inputData, renderErrorMsg) => {
   let valid = true
   inputData.forEach((input) => {
-    if (!checkForEmptyInputs([input])) return
     if (input.type !== 'text') return
 
     if (input.value.trim().length === 1) {
@@ -34,7 +33,6 @@ export const validateEmailInput = (inputData, renderErrorMsg) => {
   const emailRegex = /^[\p{L}0-9._%+-]+@[\p{L}0-9.-]+\.[\p{L}]{2,}$/u
 
   inputData.forEach((input) => {
-    if (!checkForEmptyInputs([input])) return
     if (input.type !== 'email') return
 
     if (!emailRegex.test(input.value.trim())) {
@@ -64,28 +62,21 @@ export const validateIfCountryWasSelected = (
   return isValid
 }
 
-export const validatePasswordInput = (inputData, renderErrorMsg) => {
+export const validatePasswordInput = (input, renderErrorMsg) => {
   let valid = true
-
   const allowedPasswordRegex = /^[A-Za-z0-9!@#$%&*._-]+$/
+  const value = input.value.trim()
 
-  inputData.forEach((input) => {
-    if (!checkForEmptyInputs([input])) return
-    if (input.name !== 'password') return
-
-    const value = input.value.trim()
-
-    if (!allowedPasswordRegex.test(value)) {
-      valid = false
-      if (renderErrorMsg) {
-        renderErrorMessage(
-          input,
-          ERROR_MESSAGES[input.name]?.invalid ||
-            'Password contains invalid characters',
-        )
-      }
+  if (!allowedPasswordRegex.test(value)) {
+    valid = false
+    if (renderErrorMsg) {
+      renderErrorMessage(
+        input,
+        ERROR_MESSAGES[input.name]?.invalid ||
+          'Password contains invalid characters',
+      )
     }
-  })
+  }
 
   return valid
 }
@@ -116,32 +107,31 @@ const updatePasswordChecklist = (value) => {
   ruleItems.special.classList.toggle('valid', /[!@#$%&*._-]/.test(value))
 }
 
-export const validatePasswordStrength = (inputData) => {
+export const validatePasswordStrength = (
+  input,
+  passwordInputHasBeenTouched,
+) => {
+  if (!passwordInputHasBeenTouched) return
   let valid = true
 
   // Run validation
-  inputData.forEach((input) => {
-    if (!checkForEmptyInputs([input])) return
-    if (input.name !== 'password') return
+  const value = input.value.trim()
+  updatePasswordChecklist(value)
 
-    const value = input.value.trim()
-    updatePasswordChecklist(value)
+  if (
+    value.length < 8 ||
+    !/[A-Z]/.test(value) ||
+    !/\d/.test(value) ||
+    !/[!@#$%&*._-]/.test(value)
+  ) {
+    valid = false
+  }
 
-    if (
-      value.length < 8 ||
-      !/[A-Z]/.test(value) ||
-      !/\d/.test(value) ||
-      !/[!@#$%&*._-]/.test(value)
-    ) {
-      valid = false
-    }
-
-    if (!valid) {
-      input.setAttribute('aria-invalid', true)
-    } else {
-      input.setAttribute('aria-invalid', false)
-    }
-  })
+  if (!valid) {
+    input.setAttribute('aria-invalid', true)
+  } else {
+    input.setAttribute('aria-invalid', false)
+  }
 
   return valid
 }

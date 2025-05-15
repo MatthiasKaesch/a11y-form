@@ -8,7 +8,6 @@ import {
   validateIfCountryWasSelected,
 } from './validation.js'
 import { renderErrorMessage } from './renderErrorMessage.js'
-
 import { ERROR_MESSAGES } from '../js/errorMessages.js'
 
 const form = document.querySelector('#form-element')
@@ -24,6 +23,7 @@ selectElements.forEach((selectElement) => {
 const customSelectContainer = document.querySelector('.custom-select-container')
 const toggleBtn = document.querySelector('.toggle-password')
 const passwordInput = document.getElementById('password')
+let passwordInputHasBeenTouched = false
 
 // Cancel Form submit
 form.addEventListener('submit', (e) => {
@@ -46,7 +46,33 @@ form.addEventListener('submit', (e) => {
 // Onblur validation for each input
 formInputs.forEach((input) => {
   input.onblur = () => {
-    validateFormInputs([input])
+    const name = input.name
+    clearErrorMessages([input])
+
+    if (name === 'email') {
+      const isNotEmpty = checkForEmptyInputs([input], true)
+      if (isNotEmpty) validateEmailInput([input], true)
+    }
+
+    if (name === 'password') {
+      const isNotEmpty = checkForEmptyInputs([input], true)
+      if (isNotEmpty) {
+        validatePasswordInput(input, true)
+        validatePasswordStrength(input, passwordInputHasBeenTouched)
+      }
+      passwordInputHasBeenTouched = true
+    }
+
+    if (name === 'confirm-password') {
+      const isNotEmpty = checkForEmptyInputs([input], true)
+      if (isNotEmpty) validateConfirmPassword([input], true)
+    }
+
+    if (name === 'fname' || name === 'lname') {
+      const isNotEmpty = checkForEmptyInputs([input], true)
+      if (isNotEmpty) checkForShortInputs([input], true)
+    }
+
     enableSumbitButton()
   }
 })
@@ -108,8 +134,8 @@ const validateFormInputs = (inputElements = formInputs) => {
   checkForEmptyInputs(inputElements, true)
   checkForShortInputs(inputElements, true)
   validateEmailInput(inputElements, true)
-  validatePasswordInput(inputElements, true)
-  validatePasswordStrength(inputElements)
+  validatePasswordInput(passwordInput, true)
+  validatePasswordStrength(passwordInput, passwordInputHasBeenTouched)
 }
 
 // Check enabling of submitButton
@@ -121,8 +147,8 @@ const enableSumbitButton = (renderErrorMsg = false) => {
     checkForEmptyInputs(formInputs, false),
     checkForShortInputs(formInputs, false),
     validateEmailInput(formInputs, false),
-    validatePasswordInput(formInputs, false),
-    validatePasswordStrength(formInputs),
+    validatePasswordInput(passwordInput, false),
+    validatePasswordStrength(passwordInput, passwordInputHasBeenTouched),
     validateIfCountryWasSelected(countrySelect, false),
   ]
 
