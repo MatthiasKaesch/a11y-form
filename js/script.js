@@ -3,12 +3,14 @@ import {
   checkForEmptyInputs,
   checkForShortInputs,
   validateEmailInput,
-  validatePasswordInput,
-  validatePasswordStrength,
   validateIfCountryWasSelected,
 } from './validation/validation.js'
-import { renderErrorMessage } from './renderErrorMessage.js'
-import { ERROR_MESSAGES } from '../js/errorMessages.js'
+import {
+  validatePasswordInput,
+  validatePasswordStrength,
+} from './validation/password.js'
+import { renderErrorMessage } from './errors/renderErrorMessage.js'
+import { ERROR_MESSAGES } from './errors/errorMessages.js'
 
 const form = document.querySelector('#form-element')
 const submitButton = document.querySelector('#submit-button')
